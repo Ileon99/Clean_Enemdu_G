@@ -1,8 +1,5 @@
 #First we are loading ENEMDU data from 2007 to 2021
 
-#no lo Encuentro
-
-
 
 library(haven)
 library(readr)
