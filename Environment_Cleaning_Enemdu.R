@@ -5,9 +5,8 @@ library(haven)
 library(readr)
 library(dplyr)
 library(ineq)
+library(feather)
 
-library(haven)
-Enemdu_200612 <- read_sav("Personas.sav")
 
 Enemdu_200712 <- read_csv2("ENEMDU_PERSONAS_2007_12_hom.csv")
 Enemdu_200812 <- read_csv2("ENEMDU_PERSONAS_2008_12_hom.csv")
@@ -86,8 +85,6 @@ Enemdu <- rbind(Enemdu_200712,
 )
 
 
-install.packages("feather")
 
-library(feather)
 
 write_feather(Enemdu, "Enemdu.feather")

@@ -234,21 +234,24 @@ Clean_df<- function(df){
   #10 - 17  years
   
   df$teen <- rep(0,length(df$p03))
-  df$teen[df$p03 > 10 & df$p03 < 18]=1
+  df$teen[df$p03 > 10 & df$p03 < 19]=1
   
   #more a variable of the three of them
   
   df$young <- df$little_kid + df$kid + df$teen
   
+  df$adult <- rep(0, length(df$p03))
+  df$adult[df$p03 > 18]=1
+  
   #Now we create a new variable that counts the number of little kids, kids, and teens in the household
   
   household_kids <- df %>%
     group_by(id_hogar) %>%
-    summarise_at(vars(little_kid,kid,teen, young),
+    summarise_at(vars(little_kid,kid,teen, young, adult),
                  sum) %>%
     ungroup()
   
-  names(household_kids) <- c("id_hogar", "h_little_kids","h_kid","h_teen","h_young")
+  names(household_kids) <- c("id_hogar", "h_little_kids","h_kid","h_teen","h_young", "h_adult")
   
   df <- merge(df,household_kids, by = "id_hogar")
   
@@ -616,7 +619,7 @@ Clean_df<- function(df){
                   "capital",        "taxes",                     "stransfers",    "donations", "remittances",       
                   "tot_net_income",        "redist",    "education",      "school",         "highschool",    
                   "university",     "ap",             "education_y",    "illiterate",     "age", "little_kid", "kid", "teen",
-                  "id_hogar", "h_little_kids","h_kid","h_teen","h_young", "young",
+                  "id_hogar", "h_little_kids","h_kid","h_teen","h_young", "young", "h_adult",
                   "rama2",         
                   "agriculture",   "manufacturing",  "construction",   "retail",         "information",    "financial",    
                   "realestate",     "scientific",     "public",         "other_services",
