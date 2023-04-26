@@ -86,5 +86,26 @@ Enemdu <- rbind(Enemdu_200712,
 
 
 
+################## Fixing formal per house #################################
+
+#### The variable get how many formal employees a household has
+
+#This variable is used in order to correct for endogeneity created by this variable
+
+#When there is one formal in the household there is an insurance effect 
+
+#However, now the variable count also if the main individual is formal or not, which can bias this insurance effect
+
+#What we will do is to modify this variable : 
+
+#Formal per house without counting on the main individual : 
+
+table(Enemdu$formal_per_house)
+
+Enemdu$formal_per_house0 <- Enemdu$formal_per_house
+
+Enemdu$formal_per_house <- ifelse(Enemdu$formal == 1, Enemdu$formal_per_house0 - 1, Enemdu$formal_per_house0)
+
+table(Enemdu$formal_per_house)
 
 write_feather(Enemdu, "Enemdu.feather")
