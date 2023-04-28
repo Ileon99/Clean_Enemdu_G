@@ -108,4 +108,10 @@ Enemdu$formal_per_house <- ifelse(Enemdu$formal == 1, Enemdu$formal_per_house0 -
 
 table(Enemdu$formal_per_house)
 
-write_feather(Enemdu, "Enemdu.feather")
+table(Enemdu$province,Enemdu$period)
+
+write_feather(Enemdu, "Enemdu2.feather")
+
+viejoEnemdu <- read_feather("Enemdu.feather")
+
+

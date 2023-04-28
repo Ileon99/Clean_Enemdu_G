@@ -447,6 +447,15 @@ Clean_df_2019<- function(df){
   
   #province
   df$province_c <- floor(df$city/10000)
+  
+  #Santo Domingo
+  
+  df$province_c[floor(df$city/100) == 1706]<- 23
+  
+  #Santa Elena
+  
+  df$province_c[floor(df$city/100) == 923 | floor(df$city/100) == 915| floor(df$city/100) == 917| floor(df$city/100) == 926 ]<- 24
+  
   df <- merge(df, province_codes, by = "province_c")
   
   #unemployment rate
